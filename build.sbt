@@ -15,7 +15,7 @@ lazy val dependencies = Seq(
    libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion % "provided",
    libraryDependencies += "org.apache.spark" %% "spark-hive" % sparkVersion % "provided",
    libraryDependencies += "org.apache.spark" %% "spark-graphx" % sparkVersion % "provided",
-   libraryDependencies += "org.apache.hadoop" % "hadoop-aws" % "2.7.6" % "provided",
+   libraryDependencies += "org.apache.hadoop" % "hadoop-aws" % "3.1.0" % "provided",
    libraryDependencies += "com.databricks" %% "spark-csv" % "1.5.0"
 )
 

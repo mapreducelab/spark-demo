@@ -2,7 +2,7 @@ package org.mapreducelab.spark.demo
 
 
 import org.apache.spark.sql.SparkSession
-
+import scala.util.Try
 object Emp {
   def main(args: Array[String]) {
 
@@ -12,19 +12,21 @@ object Emp {
 
       println(s"\nENDPOINT => ${s3Endpoint}\n")
 
+
       val spark = SparkSession
         .builder
         .appName("Employee")
         .config("spark.hadoop.fs.s3a.impl","org.apache.hadoop.fs.s3a.S3AFileSystem")
-        .config("spark.hadoop.fs.s3a.endpoint", s3Endpoint)
+        .config("fs.s3a.aws.credentials.provider","org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider,com.amazonaws.auth.EnvironmentVariableCredentialsProvider,com.amazonaws.auth.InstanceProfileCredentialsProvider")
+        //.config("spark.hadoop.fs.s3a.endpoint", s3Endpoint)
         .config("spark.hadoop.fs.s3a.access.key", accessKeyId)
         .config("spark.hadoop.fs.s3a.secret.key", secretAccessKey)
         .config("spark.hadoop.fs.s3a.connection.ssl.enabled", "false")
         .getOrCreate()
 
 
-      val source = args(0)
-      val target = args(1)
+      val source = Try(args(0)).getOrElse("")
+      val target = Try(args(1)).getOrElse("")
 
       val empdf = spark.read
        .format("com.databricks.spark.csv")
