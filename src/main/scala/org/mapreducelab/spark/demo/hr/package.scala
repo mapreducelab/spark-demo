@@ -13,7 +13,7 @@ package hr {
     }
 
 
-    case class HrDataPoint (source: String, target: String)
+    case class HrDataPoint (source: String , target: String)
 }
 
 package object hr {
@@ -21,7 +21,7 @@ package object hr {
    object HrDataPoint  {
         def apply(implicit config: Config) = {
             val source = if (validateConfigPath("emp-source")) config.getString("emp-source") else ""
-            val target = if (validateConfigPath("emp-source")) config.getString("emp-source") else ""
+            val target = if (validateConfigPath("emp-target")) config.getString("emp-target") else ""
             new HrDataPoint(source = source, target = target)
         }
     }

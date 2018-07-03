@@ -46,6 +46,8 @@ object Emp extends LazyLogging {
 
       empdf.show()
 
+      empdf.coalesce(1).write.csv(hrDataPoint.target)
+
       spark.stop()
   }
 }
